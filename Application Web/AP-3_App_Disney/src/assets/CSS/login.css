@@ -4,11 +4,11 @@
 
 body {
     margin: 0; 
-    display: flex;          /* Active le mode Flexbox */
-    justify-content: center; /* Centre horizontalement */
-    align-items: center;     /* Centre verticalement */
-    min-height: 100vh;      /* 100% de la hauteur de la fenêtre de visualisation */
-    background-color: #f5f5f5; /* Optionnel : un fond gris clair pour faire ressortir le bleu */
+    display: flex;         
+    justify-content: center; 
+    align-items: center;     
+    min-height: 100vh;      
+    background-color: #f5f5f5; 
 }
 
 .login-container {
