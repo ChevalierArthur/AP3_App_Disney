@@ -2,26 +2,34 @@ import { useState } from 'react'
 import '../CSS/login.css'
 import {connexionUtilisateur} from '../Services/Auth.js'
 
-function Login() {
+function Login({connected}) {
     const [response, setResponse] = useState('')
     const [message, setMessage] = useState('')
     const [Identifiant, setIdentifiant] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleSubmit = (e) => {
-    e.preventDefault()
-    setResponse(connexionUtilisateur(Identifiant, password))
-    if(response.message){
-        setMessage(response.message)
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage('');
+    setResponse('');
+
+    try {
+        const data = await connexionUtilisateur(Identifiant, password);
+
+        if (data && data.token) {
+            sessionStorage.setItem('token', data.token);
+            sessionStorage.setItem('identifiant', Identifiant);
+            sessionStorage.setItem('role', data.role);
+            setMessage('Login successful');
+            if (connected) connected(true);
+        } else {
+            setMessage(data?.message || "Identifiants incorrects ou erreur serveur.");
+            console.log('Login failed:', data);
+        }
+    } catch (err) {
+        setMessage("Impossible de contacter le serveur.");
     }
-    else{
-        sessionStorage.setItem('token', response.token)
-    sessionStorage.setItem('identifiant', Identifiant)
-    sessionStorage.setItem('role', response.role)
-    setconnected(true)
-    }
-    
-}
+};
 
 return (
     <>
@@ -49,6 +57,7 @@ return (
         <button type="submit">Login</button>
         </form>
         <p>{response}</p>
+        <p>{message}</p>
     </div>
 </>
 )

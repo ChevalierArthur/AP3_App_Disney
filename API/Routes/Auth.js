@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-
-
+const config = require('../bdd.js'); // Remonte d'un dossier pour trouver bdd.js
 function creerToken(userId) {
     return jwt.sign(
         { id: userId },
@@ -33,8 +32,9 @@ router.get('/', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+    console.log("Corps reçu:", req.body);
     const { login, mdp } = req.body;
-    const query = 'SELECT idUtilisateur, mdpUtilisateur, idEquipeUtilisateur FROM users WHERE identifiantUtilisateur = ? ';
+    const query = 'SELECT idUtilisateur, mdpUtilisateur, idEquipeUtilisateur FROM utilisateur WHERE identifiantUtilisateur = ? ';
     config.query(query, [login], (err, results) => {
         if (err) return res.status(500).json({ message: 'erreur bdd' });
         if (results.length === 0) {
@@ -46,6 +46,7 @@ router.post('/login', (req, res) => {
         }
         const token = creerToken(user.idUtilisateur);
         res.json({ id:user.idUtilisateur, token, role: user.idEquipeUtilisateur });
+        console.log("Utilisateur connecté:", user.idUtilisateur, token, "Rôle:", user.idEquipeUtilisateur);
     }
     );
 });
