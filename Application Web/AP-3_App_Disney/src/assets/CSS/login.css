@@ -1,0 +1,76 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0; 
+    display: flex;          /* Active le mode Flexbox */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center;     /* Centre verticalement */
+    min-height: 100vh;      /* 100% de la hauteur de la fenêtre de visualisation */
+    background-color: #f5f5f5; /* Optionnel : un fond gris clair pour faire ressortir le bleu */
+}
+
+.login-container {
+    background-color: #72d0ff; 
+    padding: 5px 60px;
+    border-radius: 30px; 
+    width: 100%;
+    max-width: 450px;
+    margin: 30px auto;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    font-family: sans-serif;
+}
+
+.login-container h2 {
+    color: #000; 
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: #000;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px; 
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+    background-color: #ffffff;
+    color: #000;
+}
+
+button[type="submit"] {
+    background-color: #ffffff;
+    color: #3b82f6;
+    border: 2px solid #3b82f6;
+    padding: 10px 35px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    background-color: #3b82f6;
+    color: #ffffff;
+}
+
+p {
+    margin-top: 15px;
+    color: #555;
+    font-size: 0.9rem;
+}
