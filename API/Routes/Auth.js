@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const config = require('../bdd.js'); // Remonte d'un dossier pour trouver bdd.js
+const config = require('../bdd.js');
 function creerToken(userId) {
     return jwt.sign(
         { id: userId },
