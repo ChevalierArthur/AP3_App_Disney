@@ -1,0 +1,218 @@
+/* ───────── COMPTES PAGE ───────── */
+.comptes-page {
+    padding: 28px 32px;
+    font-family: 'Nunito', sans-serif;
+    min-height: calc(100vh - 106px);
+    background-color: #f7fbff;
+    width: 90vw;
+}
+.comptes-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.comptes-search-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+    max-width: 320px;
+}
+
+.comptes-search-wrapper svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: #1a6eb5;
+    pointer-events: none;
+}
+
+.comptes-search {
+    width: 100%;
+    padding: 10px 14px 10px 36px;
+    border: 2px solid #cce8f8;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background-color: #ffffff;
+    color: #222;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.comptes-search:focus {
+    border-color: #1a6eb5;
+}
+
+.comptes-select {
+    padding: 10px 14px;
+    border: 2px solid #cce8f8;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background-color: #ffffff;
+    color: #222;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    min-width: 140px;
+}
+
+.comptes-select:focus {
+    border-color: #1a6eb5;
+}
+
+/* Bouton ajouter poussé à droite */
+.comptes-toolbar-spacer {
+    flex: 1;
+}
+
+.btn-add {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #1a6eb5;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+}
+
+.btn-add:hover {
+    background-color: #155a99;
+    transform: translateY(-1px);
+}
+
+.btn-add svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ── Tableau ── */
+.comptes-table-wrapper {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 2px 16px rgba(26, 110, 181, 0.07);
+    overflow: hidden;
+}
+
+.comptes-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.comptes-table thead {
+    background-color: #cce8f8;
+}
+
+.comptes-table thead th {
+    padding: 14px 18px;
+    text-align: left;
+    font-weight: 800;
+    color: #1a6eb5;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+.comptes-table tbody tr {
+    border-bottom: 1px solid #e8f5fc;
+    transition: background 0.15s;
+}
+
+.comptes-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.comptes-table tbody tr:hover {
+    background-color: #f0f9ff;
+}
+
+.comptes-table tbody td {
+    padding: 14px 18px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Badge parc / équipe */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.badge-parc {
+    background-color: #e0f0ff;
+    color: #1a6eb5;
+}
+
+.badge-equipe {
+    background-color: #e8f8ec;
+    color: #1e8a3e;
+}
+
+/* Bouton modifier */
+.btn-edit {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: transparent;
+    color: #1a6eb5;
+    border: 2px solid #cce8f8;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    white-space: nowrap;
+}
+
+.btn-edit:hover {
+    background-color: #cce8f8;
+    border-color: #1a6eb5;
+}
+
+.btn-edit svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* ── État vide / chargement ── */
+.comptes-empty {
+    text-align: center;
+    padding: 40px;
+    color: #aaa;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+    .comptes-page {
+        padding: 16px;
+    }
+
+    .comptes-table thead th:nth-child(3),
+    .comptes-table tbody td:nth-child(3) {
+        display: none;
+    }
+}

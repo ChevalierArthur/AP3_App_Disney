@@ -7,7 +7,7 @@ function creerToken(userId) {
     return jwt.sign(
         { id: userId },
         process.env.JWT_SECRET,
-        { expiresIn: '10m' }
+        { expiresIn: '10s' }
     );
 }
 
@@ -30,7 +30,9 @@ function auth(req, res, next) {
 router.get('/', (req, res) => {
     res.send("login GET works")
 });
-
+router.get('/verify', auth, (req, res) => {
+    res.json({ message: 'token valide' });
+});
 router.post('/login', (req, res) => {
     console.log("Corps reçu:", req.body);
     const { login, mdp } = req.body;

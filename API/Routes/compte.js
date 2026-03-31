@@ -21,15 +21,16 @@ function auth(req, res, next) {
         return res.status(403).json({ message: 'token invalide' });
     }
 }
+
 function getUsers(req, res) {
     auth(req, res, () => {
-    const query = 'SELECT idUtilisateur as id, nomUtilisateur as nom, prenomUtilisateur as prenom, identifiantUtilisateur as identifiant, idEquipeUtilisateur as idEquipe FROM utilisateur';
+    const query = 'SELECT idUtilisateur as id, nomUtilisateur as nom, prenomUtilisateur as prenom, identifiantUtilisateur as identifiant, libelleEquipe as Equipe,libelle parc as Parc FROM utilisateur inner join equipe on utilisateur.idEquipeUtilisateur = equipe.idEquipe inner join parc on equipe.idParcEquipe = parc.idParc';
     config.query(query, (err, results) => {
         if (err) return res.status(500).json({ message: 'erreur bdd' });
         res.json(results);
     });});
 }
 
-router.get('/Users', getUsers);
+router.get('/getUsers', getUsers);
 
 module.exports = router;
