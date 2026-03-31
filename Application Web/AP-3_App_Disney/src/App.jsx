@@ -16,8 +16,8 @@ function App() {
   sessionStorage.removeItem('role')
   setConnected(false)
 }
-    return (
-      <><h1>connecter</h1>
+    return (<>
+    
       <button onClick={deconnecter}>
         Déconnexion
       </button></>
