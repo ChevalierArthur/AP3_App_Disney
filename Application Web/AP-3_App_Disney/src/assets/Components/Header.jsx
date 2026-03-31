@@ -1,13 +1,11 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import '../CSS/header.css'
-import disneylandLogo from '../assets/disneyland-logo.png' // adapte le chemin si besoin
 
-function Header() {
+function Header(deconnecter) {
     const navigate = useNavigate()
 
     const handleLogout = () => {
-        sessionStorage.clear()
-        navigate('/')
+        deconnecter.deconnecter()
     }
 
     return (
@@ -21,7 +19,6 @@ function Header() {
                             <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                         </svg>
                     </div>
-                    <img src={disneylandLogo} alt="Disneyland" />
                 </NavLink>
 
                 {/* Navigation */}

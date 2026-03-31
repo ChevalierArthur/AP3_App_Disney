@@ -34,7 +34,7 @@ const handleSubmit = async (e) => {
 return (
     <>
     <div className="login-container">
-        <h2>Login</h2>
+        <h2 className='titre'>Login</h2>
         <form onSubmit={handleSubmit}>
         <div className="form-group">
             <label htmlFor="identifiant">Identifiant:</label>
@@ -54,7 +54,9 @@ return (
             onChange={(e) => setPassword(e.target.value)}
             />
         </div>
-        <button type="submit">Login</button>
+        <button className="login-btn" type="submit">
+            Login
+        </button>
         </form>
         <p>{response}</p>
         <p>{message}</p>
