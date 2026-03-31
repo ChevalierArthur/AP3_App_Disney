@@ -26,6 +26,7 @@
 }
 
 .header-avatar {
+    margin-left: 1em;
     width: 42px;
     height: 42px;
     border-radius: 50%;
@@ -78,6 +79,7 @@
 
 /* ── Bouton déconnexion ── */
 .header-logout {
+    margin-right: 1em;
     width: 42px;
     height: 42px;
     border-radius: 50%;

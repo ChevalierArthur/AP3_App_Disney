@@ -7,7 +7,7 @@ function creerToken(userId) {
     return jwt.sign(
         { id: userId },
         process.env.JWT_SECRET,
-        { expiresIn: '10s' }
+        { expiresIn: '10m' }
     );
 }
 
@@ -27,12 +27,13 @@ function auth(req, res, next) {
         return res.status(403).json({ message: 'token invalide' });
     }
 }
-router.get('/', (req, res) => {
-    res.send("login GET works")
-});
 router.get('/verify', auth, (req, res) => {
     res.json({ message: 'token valide' });
 });
+router.get('/', (req, res) => {
+    res.send("login GET works")
+});
+
 router.post('/login', (req, res) => {
     console.log("Corps reçu:", req.body);
     const { login, mdp } = req.body;

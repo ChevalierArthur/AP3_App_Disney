@@ -12,7 +12,6 @@ function Comptes() {
             try {
                 const data = await recupererComptes()
                 
-                // Sécurité : On s'assure que data est bien un tableau avant de l'assigner
                 if (Array.isArray(data)) {
                     setUtilisateurs(data)
                 } else {
@@ -32,7 +31,6 @@ function Comptes() {
     return (
         <div className="comptes-page">
 
-            {/* ── Toolbar ── */}
             <div className="comptes-toolbar">
                 <div className="comptes-toolbar-spacer" style={{ flexGrow: 1 }} />
 

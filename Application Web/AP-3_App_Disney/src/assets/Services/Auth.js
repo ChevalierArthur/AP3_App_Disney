@@ -15,7 +15,7 @@ export const connexionUtilisateur = async (login, mdp) => {
         return { message: "Le serveur ne répond pas." };
     }
 }
-export const verifierToken = async () => {
+export const verify = async () => {
     try {
         const response = await fetch('http://localhost:3000/auth/verify', {
             method: 'GET',

@@ -1,8 +1,19 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import '../CSS/header.css'
+import { verify } from '../Services/Auth'
 
 function Header(deconnecter) {
     const navigate = useNavigate()
+
+        function verifierToken() {
+        verify().then(data => {
+        if (data.message == 'token valide') { console.log('Token valide')
+        } else {
+            console.log('Token invalide ou expiré:', data)
+            deconnecter.deconnecter()
+        }
+        })
+    }
 
     const handleLogout = () => {
         deconnecter.deconnecter()
@@ -23,16 +34,16 @@ function Header(deconnecter) {
 
                 {/* Navigation */}
                 <nav className="header-nav">
-                    <NavLink to="/accueil" className={({ isActive }) => isActive ? 'active' : ''}>
+                    <NavLink to="/accueil" onClick={() => verifierToken()} className={({ isActive }) => isActive ? 'active' : ''}>
                         Accueil
                     </NavLink>
-                    <NavLink to="/missions" className={({ isActive }) => isActive ? 'active' : ''}>
+                    <NavLink to="/missions" onClick={() => verifierToken()} className={({ isActive }) => isActive ? 'active' : ''}>
                         Missions
                     </NavLink>
-                    <NavLink to="/alertes" className={({ isActive }) => isActive ? 'active' : ''}>
+                    <NavLink to="/alertes" onClick={() => verifierToken()} className={({ isActive }) => isActive ? 'active' : ''}>
                         Alertes
                     </NavLink>
-                    <NavLink to="/comptes" className={({ isActive }) => isActive ? 'active' : ''}>
+                    <NavLink to="/comptes" onClick={() => verifierToken()} className={({ isActive }) => isActive ? 'active' : ''}>
                         Comptes
                     </NavLink>
                 </nav>
