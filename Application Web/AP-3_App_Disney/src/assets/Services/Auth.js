@@ -31,3 +31,4 @@ export const verify = async () => {
         return { message: "Le serveur ne répond pas." };
     }
 }
+
