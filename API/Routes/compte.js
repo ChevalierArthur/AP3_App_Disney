@@ -32,14 +32,27 @@ function getUsers(req, res) {
 }
 function addUser(req, res) {
     auth(req, res, () => {
+        console.log("Corps reçu pour ajout d'utilisateur:", req.body);
     const { nom, prenom, identifiant, motDePasse, idEquipe } = req.body;
-    const query = 'INSERT INTO utilisateur (nomUtilisateur, prenomUtilisateur, identifiantUtilisateur, motDePasseUtilisateur, idEquipeUtilisateur) VALUES (?, ?, ?, ?, ?)';
+    console.log("Données extraites:", { nom, prenom, identifiant, motDePasse, idEquipe });
+    const query = 'INSERT INTO utilisateur (nomUtilisateur, prenomUtilisateur, identifiantUtilisateur, mdpUtilisateur, idEquipeUtilisateur) VALUES (?, ?, ?, ?, ?)';
     config.query(query, [nom, prenom, identifiant, motDePasse, idEquipe], (err) => {
         if (err) return res.status(500).json({ message: 'erreur bdd' });
         res.json({ message: 'utilisateur ajouté' });
     });});
 }
+function updateUser(req, res) {
+    auth(req, res, () => {
+    const { id, nom, prenom, identifiant, motDePasse, idEquipe } = req.body;
+    const query = 'UPDATE utilisateur SET nomUtilisateur = ?, prenomUtilisateur = ?, identifiantUtilisateur = ?, mdpUtilisateur = ?, idEquipeUtilisateur = ? WHERE idUtilisateur = ?';
+    config.query(query, [nom, prenom, identifiant, motDePasse, idEquipe, id], (err) => {
+        if (err) return res.status(500).json({ message: 'erreur bdd' });
+        res.json({ message: 'utilisateur modifié' });
+    });
+});
+}
 router.get('/getUsers', getUsers);
 router.post('/addUser', addUser);
+router.put('/updateUser', updateUser);
 
 module.exports = router;

@@ -19,6 +19,7 @@ sessionStorage.removeItem('token')
 sessionStorage.removeItem('identifiant')
 sessionStorage.removeItem('role')
 setConnected(false)
+location.href = '/'
 }
     return (<>
     <Router>
