@@ -41,13 +41,18 @@ function Attraction() {
             <div className="attractions-grid">
                 {attractions.map((attraction) => (
                     <div key={attraction.id} className="attraction-card">
-                        <img src={attraction.image} alt={attraction.name} className="attraction-image" />
-                        <h2>{attraction.name}</h2>
-                        <p>{attraction.description}</p>
-                        <p><strong>Emplacement :</strong> {attraction.location}</p>
-                        <p><strong>Durée :</strong> {attraction.duration}</p>
-                        <p><strong>Capacité :</strong> {attraction.capacity}</p>
-                        {/* Ajoutez d'autres champs si nécessaire */}
+                        <div className="card-image">
+                            <img src={attraction.image} alt={attraction.name} />
+                        </div>
+                        <div className="card-content">
+                            <h2>{attraction.name}</h2>
+                            <p className="description">{attraction.description}</p>
+                            <div className="card-details">
+                                <p><strong>Emplacement :</strong> {attraction.location}</p>
+                                <p><strong>Durée :</strong> {attraction.duration}</p>
+                                <p><strong>Capacité :</strong> {attraction.capacity}</p>
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>

@@ -1,5 +1,48 @@
 /* Attraction.css - Styles for Attraction.jsx component */
+:root {
+    --disney-bg: #eef7ff;
+    --card-bg: #ffffff;
+    --card-border: rgba(0, 123, 255, 0.18);
+    --text-main: #263245;
+    --text-muted: #6a7582;
+    --accent: #007bff;
+    --accent-alt: #28a745;
+    --shadow-soft: 0 18px 40px rgba(0, 123, 255, 0.08);
+}
 
+.attraction-page {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #f7fbff 0%, #e7f1ff 100%);
+    padding: 40px 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.attraction-header {
+    width: 100%;
+    max-width: 980px;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.attraction-header h1 {
+    font-size: 2.25rem;
+    color: var(--accent);
+    margin: 0;
+}
+
+.attraction-header p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-top: 8px;
+}
+
+.attraction-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
 .attraction-container {
     display: flex;
     flex-direction: column;
