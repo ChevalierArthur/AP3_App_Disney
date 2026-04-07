@@ -13,6 +13,7 @@ app.use(express.json());
 
 app.use('/auth', require('./Routes/Auth.js'));
 app.use('/users', require('./Routes/compte.js'));
+app.use('/equipes', require('./Routes/equipes.js'));
 app.use('/attractions', require('./Routes/attraction.js'));
 
 app.listen(port, () => {

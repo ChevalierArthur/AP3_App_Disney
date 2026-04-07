@@ -2,31 +2,34 @@ import { useState, useEffect } from 'react'
 import '../CSS/comptes.css'
 import { recupererComptes } from '../Services/Comptes.js'
 import { ajouterCompte } from '../Services/Comptes.js'
+import { modifierCompte } from '../Services/Comptes.js'
+import { getEquipe } from '../Services/Equipe.js'
+
 function Comptes() {
     const [utilisateurs, setUtilisateurs] = useState([])
-    const [loading, setLoading]= useState(true)
-    const [error, setError]= useState(null)
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
     const [showModalajouter, setShowModalajouter] = useState(false)
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await recupererComptes()
-                
-                if (Array.isArray(data)) {
-                    setUtilisateurs(data)
-                } else {
-                    console.error("Erreur API :", data)
-                    setError(data.message || "Les données reçues sont invalides.")
-                }
-            } catch (err) {
-                console.error('Erreur chargement comptes :', err)
-                setError("Erreur de connexion au serveur.")
-            } finally {
-                setLoading(false)
+    const [utilisateurAModifier, setUtilisateurAModifier] = useState(null)
+
+    const fetchData = async () => {
+        try {
+            const data = await recupererComptes()
+            if (Array.isArray(data)) {
+                setUtilisateurs(data)
+            } else {
+                console.error("Erreur API :", data)
+                setError(data.message || "Les données reçues sont invalides.")
             }
+        } catch (err) {
+            console.error('Erreur chargement comptes :', err)
+            setError("Erreur de connexion au serveur.")
+        } finally {
+            setLoading(false)
         }
-        fetchData()
-    }, [])
+    }
+
+    useEffect(() => { fetchData() }, [])
 
     return (
         <div className="comptes-page">
@@ -34,10 +37,10 @@ function Comptes() {
             <div className="comptes-toolbar">
                 <div className="comptes-toolbar-spacer" style={{ flexGrow: 1 }} />
 
-                <button className="btn-add" onClick={() => {  setShowModalajouter(true) }}>
+                <button className="btn-add" onClick={() => { setShowModalajouter(true) }}>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '20px', marginRight: '8px' }}>
                         <line x1="12" y1="5" x2="12" y2="19" />
-                        <line x1="5"  y1="12" x2="19" y2="12" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
                     </svg>
                     Ajouter un compte
                 </button>
@@ -71,7 +74,7 @@ function Comptes() {
                                     <td><span className="badge badge-equipe">{u.Equipe}</span></td>
                                     <td><span className="badge badge-parc">{u.libelleparc}</span></td>
                                     <td>
-                                        <button className="btn-edit" onClick={() => { /* TODO : modifier */ }}>
+                                        <button className="btn-edit" onClick={() => setUtilisateurAModifier(u)}>
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '16px', marginRight: '4px' }}>
                                                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                                                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
@@ -85,56 +88,149 @@ function Comptes() {
                     </tbody>
                 </table>
             </div>
-            {showModalajouter && (<Modal_Ajouter utilisateurs={utilisateurs} fermerModal={() => setShowModalajouter(false)} />)}
+
+            {showModalajouter && (
+                <Modal_Ajouter
+                    fermerModal={() => setShowModalajouter(false)}
+                    rafraichir={fetchData}
+                />
+            )}
+
+            {utilisateurAModifier && (
+                <Modal_Modifier
+                    utilisateur={utilisateurAModifier}
+                    fermerModal={() => setUtilisateurAModifier(null)}
+                    rafraichir={fetchData}
+                />
+            )}
         </div>
     )
 }
-function Modal_Ajouter({ utilisateurs, fermerModal }) {
-        const handleSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const nom = formData.get('nom');
-        const prenom = formData.get('prenom');
-        const identifiant = formData.get('identifiant');
-        const motDePasse = formData.get('motDePasse');
-        const idEquipe = formData.get('idEquipe');
+
+function Modal_Ajouter({ fermerModal, rafraichir }) {
+    const [equipes, setEquipes] = useState([])
+
+    useEffect(() => {
+        getEquipe().then(data => {
+            if (Array.isArray(data)) {
+                setEquipes(data)
+            } else {
+                console.error("Erreur API :", data)
+            }
+        })
+    }, [])
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        const nom = formData.get('nom')
+        const prenom = formData.get('prenom')
+        const identifiant = formData.get('identifiant')
+        const motDePasse = formData.get('motDePasse')
+        const idEquipe = formData.get('idEquipe')
+
         ajouterCompte(nom, prenom, identifiant, motDePasse, idEquipe).then(data => {
             if (data && data.message === 'Compte ajouté avec succès') {
-                alert('Compte ajouté avec succès');
-                fermerModal();
+                alert('Compte ajouté avec succès')
+                rafraichir()
+                fermerModal()
             } else {
-                alert(data?.message || "Erreur lors de l'ajout du compte.");
+                alert(data?.message || "Erreur lors de l'ajout du compte.")
             }
         })
     }
-    
+
     return (
         <div className="modal">
             <div className="modal-content">
                 <h2>Ajouter un compte</h2>
                 <form onSubmit={handleSubmit} className="modal-form">
-                    <label>Nom:</label>
+                    <label>Nom :</label>
                     <input type="text" name="nom" required />
-                    <label>Prénom:</label>
+                    <label>Prénom :</label>
                     <input type="text" name="prenom" required />
-                    <label>Identifiant:</label>
+                    <label>Identifiant :</label>
                     <input type="text" name="identifiant" required />
-                    <label>Mot de passe:</label>
+                    <label>Mot de passe :</label>
                     <input type="password" name="motDePasse" required />
-                    <label>Équipe:</label>
+                    <label>Équipe :</label>
                     <select name="idEquipe" required>
                         <option value="">Sélectionner une équipe</option>
-                        {utilisateurs.map(u => (
-                            <option className="option-modal" key={u.idequipe} value={u.idequipe}>{u.Equipe}</option>
+                        {equipes.map(e => (
+                            <option className="option-modal" key={e.id} value={e.id}>{e.libelle}</option>
                         ))}
                     </select>
                     <div className="modal-actions">
                         <button type="submit" className="btn-add">Ajouter</button>
-                        <button type="button" className="btn-cancel" onClick={() => fermerModal()}>Annuler</button>
+                        <button type="button" className="btn-cancel" onClick={fermerModal}>Annuler</button>
                     </div>
                 </form>
             </div>
         </div>
     )
 }
+
+function Modal_Modifier({ utilisateur, fermerModal, rafraichir }) {
+    const [equipes, setEquipes] = useState([])
+
+    useEffect(() => {
+        getEquipe().then(data => {
+            if (Array.isArray(data)) {
+                setEquipes(data)
+            } else {
+                console.error("Erreur API :", data)
+            }
+        })
+    }, [])
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        const nom = formData.get('nom')
+        const prenom = formData.get('prenom')
+        const identifiant = formData.get('identifiant')
+        const motDePasse = formData.get('motDePasse')
+        const idEquipe = formData.get('idEquipe')
+
+        modifierCompte(utilisateur.id, nom, prenom, identifiant, motDePasse || null, idEquipe).then(data => {
+            if (data && data.message === 'Compte modifié avec succès') {
+                alert('Compte modifié avec succès')
+                rafraichir()
+                fermerModal()
+            } else {
+                alert(data?.message || "Erreur lors de la modification du compte.")
+            }
+        })
+    }
+
+    return (
+        <div className="modal">
+            <div className="modal-content">
+                <h2>Modifier le compte</h2>
+                <form onSubmit={handleSubmit} className="modal-form">
+                    <label>Nom :</label>
+                    <input type="text" name="nom" defaultValue={utilisateur.nom} required />
+                    <label>Prénom :</label>
+                    <input type="text" name="prenom" defaultValue={utilisateur.prenom} required />
+                    <label>Identifiant :</label>
+                    <input type="text" name="identifiant" defaultValue={utilisateur.identifiant} required />
+                    <label>Nouveau mot de passe :</label>
+                    <input type="password" name="motDePasse" placeholder="Laisser vide pour ne pas changer" />
+                    <label>Équipe :</label>
+                    <select name="idEquipe" defaultValue={utilisateur.idEquipe ?? ''} required>
+                        <option value="">Sélectionner une équipe</option>
+                        {equipes.map(e => (
+                            <option className="option-modal" key={e.id} value={e.id}>{e.libelle}</option>
+                        ))}
+                    </select>
+                    <div className="modal-actions">
+                        <button type="submit" className="btn-add">Enregistrer</button>
+                        <button type="button" className="btn-cancel" onClick={fermerModal}>Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    )
+}
+
 export default Comptes
