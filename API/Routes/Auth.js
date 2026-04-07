@@ -37,7 +37,7 @@ router.get('/', (req, res) => {
 router.post('/login', (req, res) => {
     console.log("Corps reçu:", req.body);
     const { login, mdp } = req.body;
-    const query = 'SELECT idUtilisateur, mdpUtilisateur, idEquipeUtilisateur FROM utilisateur WHERE identifiantUtilisateur = ? ';
+    const query = 'SELECT idUtilisateur, mdpUtilisateur, libelleEquipe as libelleE FROM utilisateur inner join equipe on utilisateur.idEquipeUtilisateur = equipe.idEquipe WHERE identifiantUtilisateur = ? ';
     config.query(query, [login], (err, results) => {
         if (err) return res.status(500).json({ message: 'erreur bdd' });
         if (results.length === 0) {

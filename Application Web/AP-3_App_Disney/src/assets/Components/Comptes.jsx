@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import '../CSS/comptes.css'
 import { recupererComptes } from '../Services/Comptes.js'
-
+import { ajouterCompte } from '../Services/Comptes.js'
 function Comptes() {
     const [utilisateurs, setUtilisateurs] = useState([])
-    const [loading, setLoading]           = useState(true)
-    const [error, setError]               = useState(null)
-
+    const [loading, setLoading]= useState(true)
+    const [error, setError]= useState(null)
+    const [showModalajouter, setShowModalajouter] = useState(false)
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -34,8 +34,7 @@ function Comptes() {
             <div className="comptes-toolbar">
                 <div className="comptes-toolbar-spacer" style={{ flexGrow: 1 }} />
 
-                {/* Bouton ajouter */}
-                <button className="btn-add" onClick={() => { /* TODO : ouvrir modal */ }}>
+                <button className="btn-add" onClick={() => {  setShowModalajouter(true) }}>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '20px', marginRight: '8px' }}>
                         <line x1="12" y1="5" x2="12" y2="19" />
                         <line x1="5"  y1="12" x2="19" y2="12" />
@@ -44,7 +43,6 @@ function Comptes() {
                 </button>
             </div>
 
-            {/* ── Tableau ── */}
             <div className="comptes-table-wrapper">
                 <table className="comptes-table">
                     <thead>
@@ -71,7 +69,7 @@ function Comptes() {
                                     <td>{u.prenom}</td>
                                     <td>{u.identifiant}</td>
                                     <td><span className="badge badge-equipe">{u.Equipe}</span></td>
-                                    <td><span className="badge badge-parc">{u.Parc}</span></td>
+                                    <td><span className="badge badge-parc">{u.libelleparc}</span></td>
                                     <td>
                                         <button className="btn-edit" onClick={() => { /* TODO : modifier */ }}>
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '16px', marginRight: '4px' }}>
@@ -87,8 +85,56 @@ function Comptes() {
                     </tbody>
                 </table>
             </div>
+            {showModalajouter && (<Modal_Ajouter utilisateurs={utilisateurs} fermerModal={() => setShowModalajouter(false)} />)}
         </div>
     )
 }
-
+function Modal_Ajouter({ utilisateurs, fermerModal }) {
+        const handleSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const nom = formData.get('nom');
+        const prenom = formData.get('prenom');
+        const identifiant = formData.get('identifiant');
+        const motDePasse = formData.get('motDePasse');
+        const idEquipe = formData.get('idEquipe');
+        ajouterCompte(nom, prenom, identifiant, motDePasse, idEquipe).then(data => {
+            if (data && data.message === 'Compte ajouté avec succès') {
+                alert('Compte ajouté avec succès');
+                fermerModal();
+            } else {
+                alert(data?.message || "Erreur lors de l'ajout du compte.");
+            }
+        })
+    }
+    
+    return (
+        <div className="modal">
+            <div className="modal-content">
+                <h2>Ajouter un compte</h2>
+                <form onSubmit={handleSubmit} className="modal-form">
+                    <label>Nom:</label>
+                    <input type="text" name="nom" required />
+                    <label>Prénom:</label>
+                    <input type="text" name="prenom" required />
+                    <label>Identifiant:</label>
+                    <input type="text" name="identifiant" required />
+                    <label>Mot de passe:</label>
+                    <input type="password" name="motDePasse" required />
+                    <label>Équipe:</label>
+                    <select name="idEquipe" required>
+                        <option value="">Sélectionner une équipe</option>
+                        {utilisateurs.map(u => (
+                            <option className="option-modal" key={u.idequipe} value={u.idequipe}>{u.Equipe}</option>
+                        ))}
+                    </select>
+                    <div className="modal-actions">
+                        <button type="submit" className="btn-add">Ajouter</button>
+                        <button type="button" className="btn-cancel" onClick={() => fermerModal()}>Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    )
+}
 export default Comptes
