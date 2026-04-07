@@ -1,0 +1,88 @@
+/* Attraction.css - Styles for Attraction.jsx component */
+
+.attraction-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f8ff; /* Light blue background for Disney theme */
+    min-height: 100vh;
+}
+
+.attraction-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    transition: transform 0.3s ease;
+}
+
+.attraction-card:hover {
+    transform: translateY(-5px);
+}
+
+.attraction-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff; /* Disney blue */
+    margin-bottom: 10px;
+}
+
+.attraction-description {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.attraction-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.attraction-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.attraction-rating {
+    font-size: 18px;
+    color: #ffcc00; /* Gold for stars */
+}
+
+.attraction-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.attraction-button:hover {
+    background-color: #218838;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .attraction-card {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .attraction-title {
+        font-size: 20px;
+    }
+
+    .attraction-description {
+        font-size: 14px;
+    }
+}

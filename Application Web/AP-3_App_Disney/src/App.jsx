@@ -8,6 +8,7 @@ import Login from './assets/Components/login.jsx'
 import Headers from './assets/Components/Header.jsx'
 import { BrowserRouter as Router } from 'react-router-dom'
 import Comptes from './assets/Components/Comptes.jsx'
+import Attraction from './assets/Components/Attraction.jsx'
 function App() {
   const [connected, setConnected] = useState(false)
 
@@ -28,6 +29,7 @@ setConnected(false)
         <Route path="/missions" element={<h1>Missions</h1>} />
         <Route path="/alertes" element={<h1>Alertes</h1>} />
         <Route path="/comptes" element={ <Comptes />} />
+        <Route path="/attractions" element={ <Attraction />} />
       </Routes>
 </Router>
 </>
