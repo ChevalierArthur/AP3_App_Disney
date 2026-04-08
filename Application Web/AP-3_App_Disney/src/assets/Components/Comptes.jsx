@@ -4,6 +4,7 @@ import { recupererComptes } from '../Services/Comptes.js'
 import { ajouterCompte } from '../Services/Comptes.js'
 import { modifierCompte } from '../Services/Comptes.js'
 import { getEquipe } from '../Services/Equipe.js'
+import { supprimerutilisateur } from '../Services/Comptes.js'
 
 function Comptes() {
     const [utilisateurs, setUtilisateurs] = useState([])
@@ -11,25 +12,28 @@ function Comptes() {
     const [error, setError] = useState(null)
     const [showModalajouter, setShowModalajouter] = useState(false)
     const [utilisateurAModifier, setUtilisateurAModifier] = useState(null)
+    const [update, setUpdate] = useState(0)
 
-    const fetchData = async () => {
-        try {
-            const data = await recupererComptes()
-            if (Array.isArray(data)) {
-                setUtilisateurs(data)
-            } else {
-                console.error("Erreur API :", data)
-                setError(data.message || "Les données reçues sont invalides.")
-            }
-        } catch (err) {
-            console.error('Erreur chargement comptes :', err)
-            setError("Erreur de connexion au serveur.")
-        } finally {
-            setLoading(false)
-        }
-    }
+    const rafraichir = () => setUpdate(u => u + 1)
 
-    useEffect(() => { fetchData() }, [])
+    useEffect(() => {
+        setLoading(true)
+        setError(null)
+        recupererComptes()
+            .then(data => {
+                if (Array.isArray(data)) {
+                    setUtilisateurs(data)
+                } else {
+                    console.error("Erreur API :", data)
+                    setError(data.message || "Les données reçues sont invalides.")
+                }
+            })
+            .catch(err => {
+                console.error('Erreur chargement comptes :', err)
+                setError("Erreur de connexion au serveur.")
+            })
+            .finally(() => setLoading(false))
+    }, [update])
 
     return (
         <div className="comptes-page">
@@ -37,7 +41,7 @@ function Comptes() {
             <div className="comptes-toolbar">
                 <div className="comptes-toolbar-spacer" style={{ flexGrow: 1 }} />
 
-                <button className="btn-add" onClick={() => { setShowModalajouter(true) }}>
+                <button className="btn-add" onClick={() => setShowModalajouter(true)}>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '20px', marginRight: '8px' }}>
                         <line x1="12" y1="5" x2="12" y2="19" />
                         <line x1="5" y1="12" x2="19" y2="12" />
@@ -92,7 +96,7 @@ function Comptes() {
             {showModalajouter && (
                 <Modal_Ajouter
                     fermerModal={() => setShowModalajouter(false)}
-                    rafraichir={fetchData}
+                    rafraichir={rafraichir}
                 />
             )}
 
@@ -100,7 +104,7 @@ function Comptes() {
                 <Modal_Modifier
                     utilisateur={utilisateurAModifier}
                     fermerModal={() => setUtilisateurAModifier(null)}
-                    rafraichir={fetchData}
+                    rafraichir={rafraichir}
                 />
             )}
         </div>
@@ -128,15 +132,12 @@ function Modal_Ajouter({ fermerModal, rafraichir }) {
         const identifiant = formData.get('identifiant')
         const motDePasse = formData.get('motDePasse')
         const idEquipe = formData.get('idEquipe')
-
+        rafraichir()
         ajouterCompte(nom, prenom, identifiant, motDePasse, idEquipe).then(data => {
             if (data && data.message === 'Compte ajouté avec succès') {
-                alert('Compte ajouté avec succès')
                 rafraichir()
                 fermerModal()
-            } else {
-                alert(data?.message || "Erreur lors de l'ajout du compte.")
-            }
+            } 
         })
     }
 
@@ -191,15 +192,13 @@ function Modal_Modifier({ utilisateur, fermerModal, rafraichir }) {
         const identifiant = formData.get('identifiant')
         const motDePasse = formData.get('motDePasse')
         const idEquipe = formData.get('idEquipe')
-
+        fermerModal()
+        rafraichir()
         modifierCompte(utilisateur.id, nom, prenom, identifiant, motDePasse || null, idEquipe).then(data => {
             if (data && data.message === 'Compte modifié avec succès') {
-                alert('Compte modifié avec succès')
                 rafraichir()
                 fermerModal()
-            } else {
-                alert(data?.message || "Erreur lors de la modification du compte.")
-            }
+            } 
         })
     }
 
@@ -217,7 +216,7 @@ function Modal_Modifier({ utilisateur, fermerModal, rafraichir }) {
                     <label>Nouveau mot de passe :</label>
                     <input type="password" name="motDePasse" placeholder="Laisser vide pour ne pas changer" />
                     <label>Équipe :</label>
-                    <select name="idEquipe" defaultValue={utilisateur.idEquipe ?? ''} required>
+                    <select name="idEquipe" defaultValue={utilisateur.idEquipe ?? ''}>
                         <option value="">Sélectionner une équipe</option>
                         {equipes.map(e => (
                             <option className="option-modal" key={e.id} value={e.id}>{e.libelle}</option>
@@ -225,7 +224,15 @@ function Modal_Modifier({ utilisateur, fermerModal, rafraichir }) {
                     </select>
                     <div className="modal-actions">
                         <button type="submit" className="btn-add">Enregistrer</button>
-                        <button type="button" className="btn-cancel" onClick={fermerModal}>Annuler</button>
+                        <button type="button" className="btn-supprimer" onClick={() => {
+                            supprimerutilisateur(utilisateur.id)
+                            rafraichir()
+                            fermerModal()
+                        }}>supprimer</button>
+                        <button type="button" className="btn-cancel" onClick={() => {
+                            fermerModal()
+                            rafraichir()
+                        }}>Annuler</button>
                     </div>
                 </form>
             </div>

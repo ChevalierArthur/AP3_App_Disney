@@ -33,6 +33,10 @@ export const ajouterCompte = async (nom, prenom, identifiant, motDePasse, idEqui
 }
 export const modifierCompte = async (id, nom, prenom, identifiant, motDePasse, idEquipe) => {
     try {
+        if (!idEquipe || idEquipe.trim() === '') {
+            idEquipe = null
+        }
+
         const response = await fetch(`http://localhost:3000/users/updateUser`, {
             method: 'PUT',
             headers: {
@@ -40,6 +44,24 @@ export const modifierCompte = async (id, nom, prenom, identifiant, motDePasse, i
                 'Authorization': `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify({ id, nom, prenom, identifiant, motDePasse, idEquipe })
+        });
+        const data = await response.json();
+        return data;
+
+    } catch (error) {
+        console.error('Erreur réseau ou serveur:', error);
+        return { message: "Le serveur ne répond pas." };
+    }
+}
+export const supprimerutilisateur = async (id) => {
+    try {
+        const response = await fetch(`http://localhost:3000/users/deleteUser`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ id })
         });
         const data = await response.json();
         return data;

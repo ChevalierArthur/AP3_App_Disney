@@ -37,22 +37,58 @@ function addUser(req, res) {
     console.log("Données extraites:", { nom, prenom, identifiant, motDePasse, idEquipe });
     const query = 'INSERT INTO utilisateur (nomUtilisateur, prenomUtilisateur, identifiantUtilisateur, mdpUtilisateur, idEquipeUtilisateur) VALUES (?, ?, ?, ?, ?)';
     config.query(query, [nom, prenom, identifiant, motDePasse, idEquipe], (err) => {
-        if (err) return res.status(500).json({ message: 'erreur bdd' });
+        if (err) return res.status(500).json({ message: 'Identifiant déjà utilisé' });
         res.json({ message: 'utilisateur ajouté' });
     });});
 }
 function updateUser(req, res) {
     auth(req, res, () => {
     const { id, nom, prenom, identifiant, motDePasse, idEquipe } = req.body;
-    const query = 'UPDATE utilisateur SET nomUtilisateur = ?, prenomUtilisateur = ?, identifiantUtilisateur = ?, mdpUtilisateur = ?, idEquipeUtilisateur = ? WHERE idUtilisateur = ?';
-    config.query(query, [nom, prenom, identifiant, motDePasse, idEquipe, id], (err) => {
-        if (err) return res.status(500).json({ message: 'erreur bdd' });
-        res.json({ message: 'utilisateur modifié' });
-    });
+    if (motDePasse && motDePasse.trim() !== '' && idEquipe !== null) {
+        const query = 'UPDATE utilisateur SET nomUtilisateur = ?, prenomUtilisateur = ?, identifiantUtilisateur = ?, mdpUtilisateur = ?, idEquipeUtilisateur = ? WHERE idUtilisateur = ?';
+            return config.query(query, [nom, prenom, identifiant, motDePasse, idEquipe, id], (err) => {
+            if (err) return res.status(500).json({ message: 'erreur bdd' });
+            res.json({ message: 'utilisateur modifié' });
+        }
+        );
+    } else if (motDePasse && motDePasse.trim() !== '') {
+        const query = 'UPDATE utilisateur SET nomUtilisateur = ?, prenomUtilisateur = ?, identifiantUtilisateur = ?, mdpUtilisateur = ? WHERE idUtilisateur = ?';
+            return config.query(query, [nom, prenom, identifiant,motDePasse, id], (err) => {
+            if (err) return res.status(500).json({ message: 'erreur bdd' });
+            res.json({ message: 'utilisateur modifié' });
+        });
+    }
+    else if (idEquipe !== null) {
+        const query = 'UPDATE utilisateur SET nomUtilisateur = ?, prenomUtilisateur = ?, identifiantUtilisateur = ?, idEquipeUtilisateur = ? WHERE idUtilisateur = ?';
+            return config.query(query, [nom, prenom, identifiant, idEquipe, id], (err) => {
+            if (err) return res.status(500).json({ message: 'erreur bdd' });
+            res.json({ message: 'utilisateur modifié' });
+        }
+        );
+    }
+    else {
+        const query = 'UPDATE utilisateur SET nomUtilisateur = ?, prenomUtilisateur = ?, identifiantUtilisateur = ? WHERE idUtilisateur = ?';
+            return config.query(query, [nom, prenom, identifiant, id], (err) => {
+            if (err) return res.status(500).json({ message: 'erreur bdd' });
+            res.json({ message: 'utilisateur modifié' });
+        }
+        );
+    };
 });
 }
+function deleteUser(req, res) {
+    auth(req, res, () => {
+    const { id } = req.body;
+    const query = 'DELETE FROM utilisateur WHERE idUtilisateur = ?';
+    config.query(query, [id], (err) => {
+        if (err) return res.status(500).json({ message: 'erreur bdd' });
+        res.json({ message: 'utilisateur supprimé' });
+    });});
+}
+
 router.get('/getUsers', getUsers);
 router.post('/addUser', addUser);
 router.put('/updateUser', updateUser);
+router.delete('/deleteUser', deleteUser);
 
 module.exports = router;
