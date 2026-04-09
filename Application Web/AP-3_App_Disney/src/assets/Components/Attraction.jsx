@@ -43,7 +43,7 @@ function Attraction() {
                 {attractions.map((attraction) => (
                     <div key={attraction.idAttraction} className="attraction-card">
                         <div className="card-image">
-                            <img src={attraction.image} alt={attraction.libelleAttraction} />
+                            <img src={attraction.imageAttraction} alt={attraction.libelleAttraction} />
                         </div>
                         <div className="card-content">
                             <h2>{attraction.libelleAttraction}</h2>

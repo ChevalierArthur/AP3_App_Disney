@@ -23,7 +23,7 @@ function auth(req, res, next) {
 
 function getAttractions(req, res) {
     auth(req, res, () => {
-    const query = 'SELECT idAttraction, libelleAttraction, dureeAttraction, nbPlaceAttraction, tailleminimum, attractionOuvert, libelleZone, libelleParc from attraction inner join zone on idZoneAttraction = idZone inner join parc on idParcZone = idParc';
+    const query = 'SELECT idAttraction, libelleAttraction, dureeAttraction, nbPlaceAttraction, tailleminimum, attractionOuvert, libelleZone, libelleParc, imageAttraction from attraction inner join zone on idZoneAttraction = idZone inner join parc on idParcZone = idParc';
     config.query(query, (err, results) => {
         if (err) return res.status(500).json({ message: 'erreur bdd' });
         res.json(results);
