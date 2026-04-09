@@ -455,3 +455,24 @@
     padding: 8px 12px;
     color:#155a99;
 }
+/* Bouton Supprimer */
+.btn-supprimer {
+    background-color: #dc3545; /* Rouge d'alerte */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s;
+}
+
+.btn-supprimer:hover {
+    background-color: #c82333; /* Rouge plus foncé au survol */
+}
+
+.btn-supprimer:active {
+    background-color: #bd2130; /* Rouge encore plus foncé au clic */
+    transform: scale(0.98); /* Petit effet d'enfoncement */
+}
