@@ -40,6 +40,9 @@ function Header(deconnecter) {
                     <NavLink to="/missions" onClick={() => verifierToken()} className={({ isActive }) => isActive ? 'active' : ''}>
                         Missions
                     </NavLink>
+                    <NavLink to="/attractions" onClick={() => verifierToken()} className={({ isActive }) => isActive ? 'active' : ''}>
+                        Attractions
+                    </NavLink>
                     <NavLink to="/alertes" onClick={() => verifierToken()} className={({ isActive }) => isActive ? 'active' : ''}>
                         Alertes
                     </NavLink>
