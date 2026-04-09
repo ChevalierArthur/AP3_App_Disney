@@ -132,9 +132,8 @@ function Modal_Ajouter({ fermerModal, rafraichir }) {
         const identifiant = formData.get('identifiant')
         const motDePasse = formData.get('motDePasse')
         const idEquipe = formData.get('idEquipe')
-        rafraichir()
         ajouterCompte(nom, prenom, identifiant, motDePasse, idEquipe).then(data => {
-            if (data && data.message === 'Compte ajouté avec succès') {
+            if (data) {
                 rafraichir()
                 fermerModal()
             } 
@@ -163,7 +162,7 @@ function Modal_Ajouter({ fermerModal, rafraichir }) {
                     </select>
                     <div className="modal-actions">
                         <button type="submit" className="btn-add">Ajouter</button>
-                        <button type="button" className="btn-cancel" onClick={fermerModal}>Annuler</button>
+                        <button type="button" className="btn-cancel" onClick={fermerModal}>Fermer</button>
                     </div>
                 </form>
             </div>
@@ -192,10 +191,8 @@ function Modal_Modifier({ utilisateur, fermerModal, rafraichir }) {
         const identifiant = formData.get('identifiant')
         const motDePasse = formData.get('motDePasse')
         const idEquipe = formData.get('idEquipe')
-        fermerModal()
-        rafraichir()
         modifierCompte(utilisateur.id, nom, prenom, identifiant, motDePasse || null, idEquipe).then(data => {
-            if (data && data.message === 'Compte modifié avec succès') {
+            if (data ) {
                 rafraichir()
                 fermerModal()
             } 
@@ -232,7 +229,7 @@ function Modal_Modifier({ utilisateur, fermerModal, rafraichir }) {
                         <button type="button" className="btn-cancel" onClick={() => {
                             fermerModal()
                             rafraichir()
-                        }}>Annuler</button>
+                        }}>Fermer</button>
                     </div>
                 </form>
             </div>

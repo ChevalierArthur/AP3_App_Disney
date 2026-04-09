@@ -3,7 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const config = require('../bdd.js');
-
+const bcrypt = require('bcryptjs');
 
 function auth(req, res, next) {
     const header = req.headers.authorization;
@@ -30,16 +30,22 @@ function getUsers(req, res) {
         res.json(results);
     });});
 }
-function addUser(req, res) {
-    auth(req, res, () => {
-        console.log("Corps reçu pour ajout d'utilisateur:", req.body);
-    const { nom, prenom, identifiant, motDePasse, idEquipe } = req.body;
-    console.log("Données extraites:", { nom, prenom, identifiant, motDePasse, idEquipe });
-    const query = 'INSERT INTO utilisateur (nomUtilisateur, prenomUtilisateur, identifiantUtilisateur, mdpUtilisateur, idEquipeUtilisateur) VALUES (?, ?, ?, ?, ?)';
-    config.query(query, [nom, prenom, identifiant, motDePasse, idEquipe], (err) => {
-        if (err) return res.status(500).json({ message: 'Identifiant déjà utilisé' });
-        res.json({ message: 'utilisateur ajouté' });
-    });});
+async function addUser(req, res) {
+    auth(req, res, async () => {
+        const { nom, prenom, identifiant, motDePasse, idEquipe } = req.body;
+        
+        try {
+            const mdpHache = await bcrypt.hash(motDePasse, 10);
+            const query = 'INSERT INTO utilisateur (nomUtilisateur, prenomUtilisateur, identifiantUtilisateur, mdpUtilisateur, idEquipeUtilisateur) VALUES (?, ?, ?, ?, ?)';
+            
+            config.query(query, [nom, prenom, identifiant, mdpHache, idEquipe], (err) => {
+                if (err) return res.status(500).json({ message: 'Identifiant déjà utilisé' });
+                res.json({ message: 'utilisateur ajouté' });
+            });
+        } catch (error) {
+            res.status(500).json({ message: "Erreur lors du hachage" });
+        }
+    });
 }
 function updateUser(req, res) {
     auth(req, res, () => {
