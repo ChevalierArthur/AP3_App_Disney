@@ -34,10 +34,7 @@
     flex-direction: column;
 }
 
-.attraction-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(26, 110, 181, 0.15);
-}
+
 
 /* ── Image de l'attraction ── */
 .card-image {
@@ -52,10 +49,6 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
-}
-
-.attraction-card:hover .card-image img {
-    transform: scale(1.05);
 }
 
 /* ── Contenu de la carte ── */

@@ -51,3 +51,21 @@ export const addMission = async (titreMission, dateDebut, dateFin) => {
     }
 }
 
+export const deleteMission = async (id) => {
+    try {
+        const response = await fetch('http://localhost:3000/missions/deleteMission', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ id })
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erreur réseau ou serveur:', error);
+        return { message: "Le serveur ne répond pas." };
+    }
+}
+

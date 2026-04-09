@@ -50,8 +50,22 @@ function updateMission(req, res) {
         });
     });
 }
+
+function deleteMission(req, res) {
+    auth(req, res, () => {
+        const { id } = req.body;
+        const query = 'DELETE FROM mission WHERE idMission = ?';
+        config.query(query, [id], (err) => {
+            if (err) return res.status(500).json({ message: 'erreur bdd' });
+            res.json({ message: 'mission supprimée' });
+        });
+    });
+}
+
+
 router.get('/getMissions', getMissions);
 router.post('/addMission', addMission);
 router.put('/updateMission', updateMission);
+router.delete('/deleteMission', deleteMission);
 
 module.exports = router;

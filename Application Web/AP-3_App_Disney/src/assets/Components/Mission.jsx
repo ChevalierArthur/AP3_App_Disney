@@ -64,4 +64,55 @@ function Mission() {
     );
 }
 
+function ajoutMission() {
+    const [titreMission, setTitreMission] = useState('');
+    const [dateDebut, setDateDebut] = useState('');
+    const [dateFin, setDateFin] = useState('');
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const data = await addMission(titreMission, dateDebut, dateFin);
+            console.log('Mission ajoutée :', data);
+        } catch (err) {
+            console.error('Erreur ajout mission :', err);
+        }
+    };
+    return (
+        <div className="ajout-mission-container">
+            <h2>Ajouter une mission</h2>
+            <form onSubmit={handleSubmit} className="ajout-mission-form">
+                <div className="form-group">
+                    <label htmlFor="titreMission">Titre de la mission:</label>
+                    <input
+                        type="text"
+                        id="titreMission"
+                        value={titreMission}
+                        onChange={(e) => setTitreMission(e.target.value)}
+                    required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="dateDebut">Date de début prévue:</label>
+                    <input
+                        type="date"
+                        id="dateDebut"
+                        value={dateDebut}
+                        onChange={(e) => setDateDebut(e.target.value)}
+                    required/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="dateFin">Date de fin prévue:</label>
+                    <input
+                        type="date"
+                        id="dateFin"
+                        value={dateFin}
+                        onChange={(e) => setDateFin(e.target.value)}
+                    required/>
+                </div>
+                <button className="submit-btn" type="submit">
+                    Ajouter la mission
+                </button>
+            </form>
+        </div>
+    );
+}
 export default Mission;
