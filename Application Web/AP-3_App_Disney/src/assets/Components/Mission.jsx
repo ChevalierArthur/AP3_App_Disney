@@ -7,6 +7,7 @@ function Mission() {
     const [missions, setMissions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [showAjoutForm, setShowAjoutForm] = useState(false);
     useEffect(() => {
         const fetchMissions = async () => {
             try {
@@ -39,7 +40,8 @@ function Mission() {
     return (
         <div className="missions-container">
             <h1>Liste des Missions</h1>
-            <div className="missions-grid">
+            <button className="ajout-btn" onClick={() => setShowAjoutForm(true)}>Ajouter une mission</button>
+            <div className="missions-grid" >
                 {missions.map((mission) => (
                     <div key={mission.id} className="mission-card">
                         <h2>{mission.titreMission}</h2>
@@ -61,4 +63,5 @@ function Mission() {
         </div>
     );
 }
+
 export default Mission;

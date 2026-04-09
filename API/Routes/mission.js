@@ -29,6 +29,29 @@ function getMissions(req, res) {
     });
 }
 
+function addMission(req, res) {
+    auth(req, res, () => {
+        const { titreMission, dateDebut, dateFin } = req.body;
+        const query = 'INSERT INTO mission (titreMission, dateDebut, dateFin) VALUES (?, ?, ?)';
+        config.query(query, [titreMission, dateDebut, dateFin], (err) => {
+            if (err) return res.status(500).json({ message: 'erreur bdd' });
+            res.json({ message: 'mission ajoutée' });
+        });
+    });
+}
+
+function updateMission(req, res) {
+    auth(req, res, () => {
+        const { id, titreMission, dateDebut, dateDebutReel, dateFin, Commentaire } = req.body;
+        const query = 'UPDATE mission SET titreMission = ?, dateDebut = ?, dateDebutReel = ?, dateFin = ?, Commentaire = ? WHERE idMission = ?';
+        config.query(query, [titreMission, dateDebut, dateDebutReel, dateFin, Commentaire, id], (err) => {
+            if (err) return res.status(500).json({ message: 'erreur bdd' });
+            res.json({ message: 'mission modifiée' });
+        });
+    });
+}
 router.get('/getMissions', getMissions);
+router.post('/addMission', addMission);
+router.put('/updateMission', updateMission);
 
 module.exports = router;

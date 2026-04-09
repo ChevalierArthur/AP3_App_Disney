@@ -1,4 +1,4 @@
-/* ───────── MISSIONS PAGE ───────── */
+/* ── Configuration Globale ── */
 .missions-container {
     padding: 28px 32px;
     font-family: 'Nunito', sans-serif;
@@ -12,120 +12,160 @@
     font-size: 1.8rem;
     font-weight: 800;
     color: #1a6eb5;
-    margin-bottom: 30px;
-    text-align: center;
+    margin-bottom: 24px;
+    text-align: left;
 }
 
-/* ── Grille de missions ── */
+/* ── Grille des Missions ── */
 .missions-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-    justify-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
 }
 
-/* ── La Carte Mission (inspirée de l'image) ── */
+/* ── Carte de Mission Individuelle ── */
 .mission-card {
-    background-color: #fff5f5; /* Fond légèrement rosé comme sur l'image */
-    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
     border-radius: 20px;
     padding: 24px;
-    width: 100%;
-    max-width: 320px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 16px rgba(26, 110, 181, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centre le contenu comme sur l'image */
-    text-align: center;
-    transition: transform 0.2s ease;
+    border: 1px solid #eef6fb;
 }
 
 .mission-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(26, 110, 181, 0.15);
 }
 
 .mission-card h2 {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
+    color: #1a6eb5;
+    margin-top: 0;
+    margin-bottom: 12px;
     font-weight: 700;
-    color: #111;
-    margin-bottom: 15px;
-}
-
-/* Si tu rajoutes une balise img dans ton JSX plus tard */
-.mission-card img {
-    width: 100%;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    object-fit: cover;
 }
 
 .mission-card .description {
-    font-style: italic;
-    color: #444;
-    margin-bottom: 15px;
+    color: #555;
     font-size: 0.95rem;
-    line-height: 1.4;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Permet d'aligner les dates en bas si la description est courte */
 }
 
+/* ── Section Dates ── */
 .mission-dates {
-    margin-bottom: 20px;
-    font-size: 0.9rem;
-    color: #333;
-    width: 100%;
+    background-color: #f0f9ff;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-bottom: 16px;
 }
 
 .mission-dates p {
-    margin: 5px 0;
+    margin: 6px 0;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
 }
 
-/* ── Le Bouton Valider (Style Image) ── */
-/* Note : Tu peux ajouter <button className="btn-valider">Valider</button> dans ton JSX */
-.btn-valider, .mission-card button {
-    background-color: #ffffff;
-    color: #2563eb;
-    border: 2px solid #2563eb;
-    padding: 10px 30px;
-    border-radius: 10px;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-top: auto; /* Pousse le bouton vers le bas */
+.mission-dates strong {
+    color: #1a6eb5;
 }
 
-.btn-valider:hover, .mission-card button:hover {
-    background-color: #2563eb;
-    color: #ffffff;
-}
-
-/* ── Commentaires ── */
+/* ── Commentaire ── */
 .mission-commentaire {
-    background-color: rgba(255, 255, 255, 0.5);
+    margin-top: auto; /* Pousse le commentaire vers le bas de la carte */
+    padding-top: 15px;
+    border-top: 1px dashed #cce8f8; /* Bordure discrète */
+    background-color: #f9fffb; /* Teinte très légèrement verte pour le différencier */
     padding: 10px;
     border-radius: 8px;
-    margin-top: 10px;
-    font-size: 0.85rem;
-    width: 100%;
 }
 
-/* ── Chargement & Erreur ── */
+.mission-commentaire strong {
+    display: block;
+    font-size: 0.75rem;
+    color: #1e8a3e;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+
+.mission-commentaire p {
+    font-style: italic;
+    font-size: 0.88rem;
+    color: #444;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ── États Chargement et Erreur ── */
 .loading, .error {
-    text-align: center;
-    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
     font-weight: 700;
+    font-size: 1.1rem;
+    font-family: 'Nunito', sans-serif;
 }
 
-.error { color: #d32f2f; }
+.loading {
+    color: #1a6eb5;
+}
+
+.error {
+    color: #dc3545;
+    background-color: #fff5f5;
+    border-radius: 12px;
+    border: 1px solid #ffc1c1;
+    margin: 20px;
+}
+.ajout-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #1a6eb5;
+    color: #ffffff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(26, 110, 181, 0.2);
+}
+
+.ajout-btn:hover {
+    background-color: #155a99;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(26, 110, 181, 0.3);
+}
+
+.ajout-btn:active {
+    transform: translateY(0);
+}
+
+.ajout-btn svg {
+    width: 18px;
+    height: 18px;
+}
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
     .missions-container {
         width: 100%;
-        padding: 15px;
+        padding: 16px;
     }
-    
+
     .missions-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
     }
 }

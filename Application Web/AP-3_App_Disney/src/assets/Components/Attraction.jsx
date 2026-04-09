@@ -1,7 +1,6 @@
 import { useState,  useEffect} from "react";
 import '../CSS/Attraction.css'
 import { getAttractions } from "../Services/Attractions.js";
-
 function Attraction() {
     const [attractions, setAttractions] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -47,11 +46,11 @@ function Attraction() {
                         </div>
                         <div className="card-content">
                             <h2>{attraction.libelleAttraction}</h2>
-                            <p className="description">{attraction.description}</p>
                             <div className="card-details">
                                 <p><strong>Emplacement :</strong> {attraction.libelleZone}</p>
                                 <p><strong>Durée :</strong> {attraction.dureeAttraction} minutes</p>
                                 <p><strong>Capacité :</strong> {attraction.nbPlaceAttraction} personnes</p>
+                                <p><strong>Taille minimum :</strong> {attraction.tailleminimum} cm</p>
                             </div>
                         </div>
                     </div>
