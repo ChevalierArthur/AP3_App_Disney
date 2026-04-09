@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const config = require('../bdd.js');
 const bcrypt = require('bcryptjs');
+
+
 function creerToken(userId) {
     return jwt.sign(
         { id: userId },
