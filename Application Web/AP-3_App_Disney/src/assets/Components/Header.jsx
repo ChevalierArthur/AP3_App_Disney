@@ -46,9 +46,11 @@ function Header(deconnecter) {
                     <NavLink to="/alertes" onClick={() => verifierToken()} className={({ isActive }) => isActive ? 'active' : ''}>
                         Alertes
                     </NavLink>
-                    <NavLink to="/comptes" onClick={() => verifierToken()} className={({ isActive }) => isActive ? 'active' : ''}>
-                        Comptes
-                    </NavLink>
+                    {sessionStorage.getItem('role') === 'Administrateur' && (
+                        <NavLink to="/comptes" onClick={() => verifierToken()} className={({ isActive }) => isActive ? 'active' : ''}>
+                            Comptes
+                        </NavLink>
+                    )}
                 </nav>
 
                 {/* Déconnexion */}

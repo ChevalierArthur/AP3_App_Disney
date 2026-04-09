@@ -21,6 +21,7 @@ const handleSubmit = async (e) => {
             sessionStorage.setItem('identifiant', Identifiant);
             sessionStorage.setItem('role', data.role);
             setMessage('Login successful');
+            console.log('Login successful:', data);
             if (connected) connected(true);
         } else {
             setMessage(data?.message || "Identifiants incorrects ou erreur serveur.");

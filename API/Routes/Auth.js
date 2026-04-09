@@ -48,8 +48,8 @@ router.post('/login', (req, res) => {
             return res.status(401).json({ message: 'mdp incorrect' });
         }
         const token = creerToken(user.idUtilisateur);
-        res.json({ id:user.idUtilisateur, token, role: user.idEquipeUtilisateur });
-        console.log("Utilisateur connecté:", user.idUtilisateur, token, "Rôle:", user.idEquipeUtilisateur);
+        res.json({ id:user.idUtilisateur, token, role: user.libelleE });
+        console.log("Utilisateur connecté:", user.idUtilisateur, token, "Rôle:", user.libelleE);
     }
     );
 });

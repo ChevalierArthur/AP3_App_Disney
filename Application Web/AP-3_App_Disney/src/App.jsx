@@ -30,7 +30,11 @@ location.href = '/'
         <Route path="/accueil" element={<h1>Accueil</h1>} />
         <Route path="/missions" element={<Mission />} />
         <Route path="/alertes" element={<h1>Alertes</h1>} />
-        <Route path="/comptes" element={ <Comptes />} />
+        {sessionStorage.getItem('role') === 'Administrateur' && (
+          <>
+            <Route path="/comptes" element={ <Comptes />} />
+          </>
+        )}
         <Route path="/attractions" element={ <Attraction />} />
       </Routes>
 </Router>
