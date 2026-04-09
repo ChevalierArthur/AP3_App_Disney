@@ -1,131 +1,156 @@
-/* Attraction.css - Styles for Attraction.jsx component */
-:root {
-    --disney-bg: #eef7ff;
-    --card-bg: #ffffff;
-    --card-border: rgba(0, 123, 255, 0.18);
-    --text-main: #263245;
-    --text-muted: #6a7582;
-    --accent: #007bff;
-    --accent-alt: #28a745;
-    --shadow-soft: 0 18px 40px rgba(0, 123, 255, 0.08);
+/* ───────── ATTRACTIONS PAGE ───────── */
+.attractions-container {
+    padding: 28px 32px;
+    font-family: 'Nunito', sans-serif;
+    min-height: calc(100vh - 106px);
+    background-color: #f7fbff;
+    width: 90vw;
+    margin: 0 auto;
 }
 
-.attraction-page {
-    min-height: 100vh;
-    background: linear-gradient(180deg, #f7fbff 0%, #e7f1ff 100%);
-    padding: 40px 16px;
-    display: flex;
-    justify-content: center;
-}
-
-.attraction-header {
-    width: 100%;
-    max-width: 980px;
-    text-align: center;
+.attractions-container h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1a6eb5;
     margin-bottom: 24px;
+    letter-spacing: -0.02em;
 }
 
-.attraction-header h1 {
-    font-size: 2.25rem;
-    color: var(--accent);
-    margin: 0;
-}
-
-.attraction-header p {
-    color: var(--text-muted);
-    font-size: 1rem;
-    margin-top: 8px;
-}
-
-.attraction-grid {
-    width: 100%;
+/* ── Grille de cartes ── */
+.attractions-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 24px;
 }
-.attraction-container {
+
+/* ── Carte Individuelle ── */
+.attraction-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(26, 110, 181, 0.08);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #f0f8ff; /* Light blue background for Disney theme */
-    min-height: 100vh;
-}
-
-.attraction-card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-    padding: 20px;
-    width: 100%;
-    max-width: 600px;
-    transition: transform 0.3s ease;
 }
 
 .attraction-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(26, 110, 181, 0.15);
 }
 
-.attraction-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #007bff; /* Disney blue */
-    margin-bottom: 10px;
-}
-
-.attraction-description {
-    font-size: 16px;
-    color: #333;
-    line-height: 1.5;
-    margin-bottom: 15px;
-}
-
-.attraction-image {
+/* ── Image de l'attraction ── */
+.card-image {
     width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    height: 200px;
+    overflow: hidden;
+    background-color: #cce8f8; /* Fallback couleur */
 }
 
-.attraction-details {
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.attraction-card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+/* ── Contenu de la carte ── */
+.card-content {
+    padding: 20px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
-.attraction-rating {
-    font-size: 18px;
-    color: #ffcc00; /* Gold for stars */
+.card-content h2 {
+    margin: 0 0 12px 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #1a6eb5;
 }
 
-.attraction-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+.card-content .description {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 18px;
+    flex-grow: 1;
 }
 
-.attraction-button:hover {
-    background-color: #218838;
+/* ── Détails (Emplacement, Capacité, etc.) ── */
+.card-details {
+    padding-top: 15px;
+    border-top: 1px solid #e8f5fc;
 }
 
-/* Responsive design */
+.card-details p {
+    margin: 6px 0;
+    font-size: 0.88rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.card-details strong {
+    color: #1a6eb5;
+    font-weight: 700;
+}
+
+/* ── États de chargement et erreur ── */
+.loading, .error {
+    text-align: center;
+    padding: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: #1a6eb5;
+    background-color: #f7fbff;
+    border-radius: 12px;
+    margin: 20px;
+}
+
+.error {
+    color: #d32f2f;
+    border: 2px solid #ffcdd2;
+    background-color: #fff5f5;
+}
+
+/* ── Responsive ── */
+
+/* Tablette */
+@media (max-width: 1024px) {
+    .attractions-container {
+        width: 95vw;
+        padding: 24px;
+    }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
-    .attraction-card {
-        margin: 10px;
-        padding: 15px;
+    .attractions-container {
+        width: 100%;
+        padding: 16px;
+        box-sizing: border-box;
     }
 
-    .attraction-title {
-        font-size: 20px;
+    .attractions-grid {
+        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+        gap: 20px;
     }
 
-    .attraction-description {
-        font-size: 14px;
+    .card-image {
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .attractions-container h1 {
+        font-size: 1.5rem;
+    }
+    
+    .card-content {
+        padding: 16px;
     }
 }

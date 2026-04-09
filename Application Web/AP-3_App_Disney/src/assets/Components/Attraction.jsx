@@ -11,6 +11,7 @@ function Attraction() {
         const fetchAttractions = async () => {
             try {
                 const data = await getAttractions();
+                console.log('Données reçues :', data);
                 if (Array.isArray(data)) {
                     setAttractions(data);
                 } else {
@@ -40,17 +41,17 @@ function Attraction() {
             <h1>Attractions</h1>
             <div className="attractions-grid">
                 {attractions.map((attraction) => (
-                    <div key={attraction.id} className="attraction-card">
+                    <div key={attraction.idAttraction} className="attraction-card">
                         <div className="card-image">
-                            <img src={attraction.image} alt={attraction.name} />
+                            <img src={attraction.image} alt={attraction.libelleAttraction} />
                         </div>
                         <div className="card-content">
-                            <h2>{attraction.name}</h2>
+                            <h2>{attraction.libelleAttraction}</h2>
                             <p className="description">{attraction.description}</p>
                             <div className="card-details">
-                                <p><strong>Emplacement :</strong> {attraction.location}</p>
-                                <p><strong>Durée :</strong> {attraction.duration}</p>
-                                <p><strong>Capacité :</strong> {attraction.capacity}</p>
+                                <p><strong>Emplacement :</strong> {attraction.libelleZone}</p>
+                                <p><strong>Durée :</strong> {attraction.dureeAttraction} minutes</p>
+                                <p><strong>Capacité :</strong> {attraction.nbPlaceAttraction}</p>
                             </div>
                         </div>
                     </div>
