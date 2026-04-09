@@ -51,7 +51,7 @@ function Attraction() {
                             <div className="card-details">
                                 <p><strong>Emplacement :</strong> {attraction.libelleZone}</p>
                                 <p><strong>Durée :</strong> {attraction.dureeAttraction} minutes</p>
-                                <p><strong>Capacité :</strong> {attraction.nbPlaceAttraction}</p>
+                                <p><strong>Capacité :</strong> {attraction.nbPlaceAttraction} personnes</p>
                             </div>
                         </div>
                     </div>

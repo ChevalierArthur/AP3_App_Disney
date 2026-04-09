@@ -1,0 +1,131 @@
+/* ───────── MISSIONS PAGE ───────── */
+.missions-container {
+    padding: 28px 32px;
+    font-family: 'Nunito', sans-serif;
+    min-height: calc(100vh - 106px);
+    background-color: #f7fbff;
+    width: 90vw;
+    margin: 0 auto;
+}
+
+.missions-container h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1a6eb5;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* ── Grille de missions ── */
+.missions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    justify-items: center;
+}
+
+/* ── La Carte Mission (inspirée de l'image) ── */
+.mission-card {
+    background-color: #fff5f5; /* Fond légèrement rosé comme sur l'image */
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    padding: 24px;
+    width: 100%;
+    max-width: 320px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre le contenu comme sur l'image */
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.mission-card:hover {
+    transform: translateY(-5px);
+}
+
+.mission-card h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 15px;
+}
+
+/* Si tu rajoutes une balise img dans ton JSX plus tard */
+.mission-card img {
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+.mission-card .description {
+    font-style: italic;
+    color: #444;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.mission-dates {
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #333;
+    width: 100%;
+}
+
+.mission-dates p {
+    margin: 5px 0;
+}
+
+/* ── Le Bouton Valider (Style Image) ── */
+/* Note : Tu peux ajouter <button className="btn-valider">Valider</button> dans ton JSX */
+.btn-valider, .mission-card button {
+    background-color: #ffffff;
+    color: #2563eb;
+    border: 2px solid #2563eb;
+    padding: 10px 30px;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: auto; /* Pousse le bouton vers le bas */
+}
+
+.btn-valider:hover, .mission-card button:hover {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+
+/* ── Commentaires ── */
+.mission-commentaire {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+/* ── Chargement & Erreur ── */
+.loading, .error {
+    text-align: center;
+    padding: 40px;
+    font-weight: 700;
+}
+
+.error { color: #d32f2f; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .missions-container {
+        width: 100%;
+        padding: 15px;
+    }
+    
+    .missions-grid {
+        grid-template-columns: 1fr;
+    }
+}

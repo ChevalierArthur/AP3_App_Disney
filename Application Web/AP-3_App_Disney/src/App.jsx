@@ -9,6 +9,7 @@ import Headers from './assets/Components/Header.jsx'
 import { BrowserRouter as Router } from 'react-router-dom'
 import Comptes from './assets/Components/Comptes.jsx'
 import Attraction from './assets/Components/Attraction.jsx'
+import Mission from './assets/Components/Mission.jsx'
 function App() {
   const [connected, setConnected] = useState(false)
 
@@ -27,7 +28,7 @@ location.href = '/'
       <Headers deconnecter={deconnecter} />
       <Routes>
         <Route path="/accueil" element={<h1>Accueil</h1>} />
-        <Route path="/missions" element={<h1>Missions</h1>} />
+        <Route path="/missions" element={<Mission />} />
         <Route path="/alertes" element={<h1>Alertes</h1>} />
         <Route path="/comptes" element={ <Comptes />} />
         <Route path="/attractions" element={ <Attraction />} />
