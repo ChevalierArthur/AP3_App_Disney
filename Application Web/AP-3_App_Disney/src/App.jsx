@@ -10,6 +10,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import Comptes from './assets/Components/Comptes.jsx'
 import Attraction from './assets/Components/Attraction.jsx'
 import Mission from './assets/Components/Mission.jsx'
+import Alertes from './assets/Components/Alertes.jsx'
 function App() {
   const [connected, setConnected] = useState(false)
 
@@ -29,7 +30,7 @@ location.href = '/'
       <Routes>
         <Route path="/accueil" element={<h1>Accueil</h1>} />
         <Route path="/missions" element={<Mission />} />
-        <Route path="/alertes" element={<h1>Alertes</h1>} />
+        <Route path="/alertes" element={<Alertes />} />
         {sessionStorage.getItem('role') === 'Administrateur' && (
           <>
             <Route path="/comptes" element={ <Comptes />} />

@@ -16,7 +16,7 @@ app.use('/users', require('./Routes/compte.js'));
 app.use('/equipes', require('./Routes/equipes.js'));
 app.use('/attractions', require('./Routes/attraction.js'));
 app.use('/missions', require('./Routes/mission.js'));
-
+app.use('/alertes', require('./Routes/Alertes.js'));
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
