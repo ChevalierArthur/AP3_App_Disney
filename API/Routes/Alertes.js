@@ -26,5 +26,27 @@ function getAlertes(req, res) {
         res.json(results);
     });});
 }
+function addAlerte(req, res) {
+    auth(req, res, () => {
+        const { titreAlerte, descriptionAlerte, dateAlerte, idAttractionAlerte, idniveauAlerte } = req.body;
+        const query = 'INSERT INTO alerte (titreAlerte, descriptionAlerte, dateAlerte, idAttractionAlerte, idniveauAlerte) VALUES (?, ?, ?, ?, ?)';
+        config.query(query, [titreAlerte, descriptionAlerte, dateAlerte, idAttractionAlerte, idniveauAlerte], (err) => {
+            if (err) return res.status(500).json({ message: 'erreur bdd' });
+            res.json({ message: 'alerte ajoutée' });
+        });
+    });
+}
+function supprimerAlerte(req, res) {
+    auth(req, res, () => {
+        const { id } = req.body;
+        const query = 'DELETE FROM alerte WHERE idAlerte = ?';
+        config.query(query, [id], (err) => {
+            if (err) return res.status(500).json({ message: 'erreur bdd' });
+            res.json({ message: 'alerte supprimée' });
+        });
+    });
+}
+router.post('/deleteAlerte', supprimerAlerte);
+router.post('/addAlerte', addAlerte);
 router.get('/getAlertes', getAlertes);
 module.exports = router;
