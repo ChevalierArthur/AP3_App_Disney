@@ -1,0 +1,76 @@
+.accueil-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 100vw;
+}
+
+.accueil-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.accueil-card {
+  position: relative;
+  height: 450px;
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Images d'arrière-plan (Remplace par tes propres liens d'images) */
+.card-attractions {
+  background-image: url('https://images.unsplash.com/photo-1505312739580-0a71676605d3?q=80&w=1000');
+  border: 4px solid #add8e6; /* Bordure bleue claire */
+}
+
+.card-missions {
+  background-image: url('https://images.unsplash.com/photo-1513297844881-6091eb1107d7?q=80&w=1000');
+  border: 4px solid #e0e0e0; /* Bordure grise */
+}
+
+.card-alertes {
+  background-image: url('https://images.unsplash.com/photo-1544081047-902949d32d3a?q=80&w=1000');
+  border: 4px solid #ffcccb; /* Bordure rose/rouge */
+}
+
+/* L'effet de voile coloré (Overlay) */
+.card-overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.card-attractions .card-overlay { background-color: rgba(173, 216, 230, 0.4); }
+.card-missions .card-overlay { background-color: rgba(224, 224, 224, 0.4); }
+.card-alertes .card-overlay { background-color: rgba(255, 204, 203, 0.4); }
+
+.accueil-card h2 {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Effets au survol */
+.accueil-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.accueil-card:hover .card-overlay {
+  background-color: rgba(0, 0, 0, 0.2); /* S'assombrit au survol */
+}

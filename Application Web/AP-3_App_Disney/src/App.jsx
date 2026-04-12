@@ -11,6 +11,7 @@ import Comptes from './assets/Components/Comptes.jsx'
 import Attraction from './assets/Components/Attraction.jsx'
 import Mission from './assets/Components/Mission.jsx'
 import Alertes from './assets/Components/Alertes.jsx'
+import Accueil from './assets/Components/Accueil.jsx'
 function App() {
   const [connected, setConnected] = useState(false)
 
@@ -28,7 +29,8 @@ location.href = '/'
     <Router>
       <Headers deconnecter={deconnecter} />
       <Routes>
-        <Route path="/accueil" element={<h1>Accueil</h1>} />
+        <Route path="/" element={<Accueil />} />
+        <Route path="/accueil" element={<Accueil />} />
         <Route path="/missions" element={<Mission />} />
         <Route path="/alertes" element={<Alertes />} />
         {sessionStorage.getItem('role') === 'Administrateur' && (
