@@ -1,35 +1,56 @@
-import { useState } from 'react'
+import { use, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-
+import { Route } from 'react-router-dom'
+import { Routes } from 'react-router-dom'
+import Login from './assets/Components/login.jsx'
+import Headers from './assets/Components/Header.jsx'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Comptes from './assets/Components/Comptes.jsx'
+import Attraction from './assets/Components/Attraction.jsx'
+import Mission from './assets/Components/Mission.jsx'
+import Alertes from './assets/Components/Alertes.jsx'
+import Accueil from './assets/Components/Accueil.jsx'
 function App() {
-  const [count, setCount] = useState(0)
+  const [connected, setConnected] = useState(false)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+if (sessionStorage.getItem('token')) {
+
+function deconnecter() {
+sessionStorage.removeItem('token')
+sessionStorage.removeItem('identifiant')
+sessionStorage.removeItem('role')
+setConnected(false)
+location.href = '/'
+}
+    return (<>
+    <Router>
+      <Headers deconnecter={deconnecter} />
+      <Routes>
+        <Route path="/" element={<Accueil />} />
+        <Route path="/accueil" element={<Accueil />} />
+        <Route path="/missions" element={<Mission />} />
+        <Route path="/alertes" element={<Alertes />} />
+        {sessionStorage.getItem('role') === 'Administrateur' && (
+          <>
+            <Route path="/comptes" element={ <Comptes />} />
+          </>
+        )}
+        <Route path="/attractions" element={ <Attraction />} />
+      </Routes>
+</Router>
+</>
+    )
+  }
+  else{
+    
+
+    return (
+      <Login connected={setConnected}/>
+    )
+  }
 }
 
 export default App

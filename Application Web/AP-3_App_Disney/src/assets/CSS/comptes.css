@@ -1,0 +1,488 @@
+/* ───────── COMPTES PAGE ───────── */
+.comptes-page {
+    padding: 28px 32px;
+    font-family: 'Nunito', sans-serif;
+    min-height: calc(100vh - 106px);
+    background-color: #f7fbff;
+    width: 90vw;
+}
+.comptes-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.comptes-search-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+    max-width: 320px;
+}
+
+.comptes-search-wrapper svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: #1a6eb5;
+    pointer-events: none;
+}
+
+.comptes-search {
+    width: 100%;
+    padding: 10px 14px 10px 36px;
+    border: 2px solid #cce8f8;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background-color: #ffffff;
+    color: #222;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.comptes-search:focus {
+    border-color: #1a6eb5;
+}
+
+.comptes-select {
+    padding: 10px 14px;
+    border: 2px solid #cce8f8;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background-color: #ffffff;
+    color: #222;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    min-width: 140px;
+}
+
+.comptes-select:focus {
+    border-color: #1a6eb5;
+}
+
+/* Bouton ajouter poussé à droite */
+.comptes-toolbar-spacer {
+    flex: 1;
+}
+
+.btn-add {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #1a6eb5;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+}
+
+.btn-add:hover {
+    background-color: #155a99;
+    transform: translateY(-1px);
+}
+
+.btn-add svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ── Tableau ── */
+.comptes-table-wrapper {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 2px 16px rgba(26, 110, 181, 0.07);
+    overflow: hidden;
+}
+
+.comptes-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.comptes-table thead {
+    background-color: #cce8f8;
+}
+
+.comptes-table thead th {
+    padding: 14px 18px;
+    text-align: left;
+    font-weight: 800;
+    color: #1a6eb5;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+.comptes-table tbody tr {
+    border-bottom: 1px solid #e8f5fc;
+    transition: background 0.15s;
+}
+
+.comptes-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.comptes-table tbody tr:hover {
+    background-color: #f0f9ff;
+}
+
+.comptes-table tbody td {
+    padding: 14px 18px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Badge parc / équipe */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.badge-parc {
+    background-color: #e0f0ff;
+    color: #1a6eb5;
+}
+
+.badge-equipe {
+    background-color: #e8f8ec;
+    color: #1e8a3e;
+}
+
+/* Bouton modifier */
+.btn-edit {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: transparent;
+    color: #1a6eb5;
+    border: 2px solid #cce8f8;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    white-space: nowrap;
+}
+
+.btn-edit:hover {
+    background-color: #cce8f8;
+    border-color: #1a6eb5;
+}
+
+.btn-edit svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* ── État vide / chargement ── */
+.comptes-empty {
+    text-align: center;
+    padding: 40px;
+    color: #aaa;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* ── Responsive ── */
+
+/* Tablette large (≤1024px) */
+@media (max-width: 1024px) {
+    .comptes-page {
+        width: 95vw;
+        padding: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .comptes-page {
+        width: 100%;
+        padding: 16px;
+        box-sizing: border-box;
+    }
+
+    .comptes-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .comptes-toolbar-spacer {
+        display: none;
+    }
+
+    .btn-add {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .comptes-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 14px;
+    }
+
+    .comptes-table {
+        min-width: 520px;
+    }
+
+    .comptes-table thead th:nth-child(4),
+    .comptes-table tbody td:nth-child(4),
+    .comptes-table thead th:nth-child(5),
+    .comptes-table tbody td:nth-child(5) {
+        display: none;
+    }
+
+    .comptes-table thead th,
+    .comptes-table tbody td {
+        padding: 12px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .comptes-page {
+        padding: 12px;
+    }
+
+    .comptes-table thead th:nth-child(3),
+    .comptes-table tbody td:nth-child(3) {
+        display: none;
+    }
+
+    .comptes-table {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .btn-edit {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    .btn-edit span {
+        display: none;
+    }
+
+    .comptes-table thead th,
+    .comptes-table tbody td {
+        padding: 10px 8px;
+        font-size: 0.85rem;
+    }
+
+    .badge {
+        padding: 3px 8px;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .comptes-table thead th {
+        font-size: 0.75rem;
+        letter-spacing: 0;
+    }
+
+    .btn-add {
+        font-size: 0.88rem;
+        padding: 10px 14px;
+    }
+}
+/* ───────── MODAL ───────── */
+.modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(26, 110, 181, 0.15);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+    box-sizing: border-box;
+}
+.modal-content-mission {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(26, 110, 181, 0.15);
+    padding: 32px;
+    width: 100%;
+    max-width: 80vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+.modal-content {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(26, 110, 181, 0.15);
+    padding: 32px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.modal-content h2 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #1a6eb5;
+    margin: 0 0 24px 0;
+}
+
+/* ── Champs du formulaire ── */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.modal-content label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #1a6eb5;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 10px;
+}
+
+.modal-content label:first-of-type {
+    margin-top: 0;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="password"],
+.modal-content select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #cce8f8;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #222;
+    background-color: #f7fbff;
+    outline: none;
+    transition: border-color 0.2s, background-color 0.2s;
+    box-sizing: border-box;
+}
+
+.modal-content input[type="text"]:focus,
+.modal-content input[type="password"]:focus,
+.modal-content select:focus {
+    border-color: #1a6eb5;
+    background-color: #ffffff;
+}
+
+.modal-content input[type="text"]::placeholder,
+.modal-content input[type="password"]::placeholder {
+    color: #b0c8e0;
+    font-weight: 600;
+}
+
+.modal-content select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231a6eb5' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+}
+
+/* ── Boutons d'action ── */
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.modal-actions .btn-add {
+    flex: 1;
+    justify-content: center;
+}
+
+.btn-cancel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: #1a6eb5;
+    border: 2px solid #cce8f8;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    white-space: nowrap;
+}
+
+.btn-cancel:hover {
+    background-color: #f0f9ff;
+    border-color: #1a6eb5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 24px 18px;
+        border-radius: 16px;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+    }
+
+    .modal-actions .btn-add,
+    .btn-cancel {
+        width: 100%;
+    }
+}
+.option-modal {
+    padding: 8px 12px;
+    color:#155a99;
+}
+/* Bouton Supprimer */
+.btn-supprimer {
+    background-color: #dc3545; /* Rouge d'alerte */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s;
+}
+
+.btn-supprimer:hover {
+    background-color: #c82333; /* Rouge plus foncé au survol */
+}
+
+.btn-supprimer:active {
+    background-color: #bd2130; /* Rouge encore plus foncé au clic */
+    transform: scale(0.98); /* Petit effet d'enfoncement */
+}

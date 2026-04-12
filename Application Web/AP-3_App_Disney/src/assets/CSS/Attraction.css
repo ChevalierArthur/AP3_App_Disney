@@ -1,0 +1,149 @@
+/* ───────── ATTRACTIONS PAGE ───────── */
+.attractions-container {
+    padding: 28px 32px;
+    font-family: 'Nunito', sans-serif;
+    min-height: calc(100vh - 106px);
+    background-color: #f7fbff;
+    width: 90vw;
+    margin: 0 auto;
+}
+
+.attractions-container h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1a6eb5;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+}
+
+/* ── Grille de cartes ── */
+.attractions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+/* ── Carte Individuelle ── */
+.attraction-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(26, 110, 181, 0.08);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+/* ── Image de l'attraction ── */
+.card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background-color: #cce8f8; /* Fallback couleur */
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* ── Contenu de la carte ── */
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-content h2 {
+    margin: 0 0 12px 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #1a6eb5;
+}
+
+.card-content .description {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 18px;
+    flex-grow: 1;
+}
+
+/* ── Détails (Emplacement, Capacité, etc.) ── */
+.card-details {
+    padding-top: 15px;
+    border-top: 1px solid #e8f5fc;
+}
+
+.card-details p {
+    margin: 6px 0;
+    font-size: 0.88rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.card-details strong {
+    color: #1a6eb5;
+    font-weight: 700;
+}
+
+/* ── États de chargement et erreur ── */
+.loading, .error {
+    text-align: center;
+    padding: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: #1a6eb5;
+    background-color: #f7fbff;
+    border-radius: 12px;
+    margin: 20px;
+}
+
+.error {
+    color: #d32f2f;
+    border: 2px solid #ffcdd2;
+    background-color: #fff5f5;
+}
+
+/* ── Responsive ── */
+
+/* Tablette */
+@media (max-width: 1024px) {
+    .attractions-container {
+        width: 95vw;
+        padding: 24px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .attractions-container {
+        width: 100%;
+        padding: 16px;
+        box-sizing: border-box;
+    }
+
+    .attractions-grid {
+        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+        gap: 20px;
+    }
+
+    .card-image {
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .attractions-container h1 {
+        font-size: 1.5rem;
+    }
+    
+    .card-content {
+        padding: 16px;
+    }
+}

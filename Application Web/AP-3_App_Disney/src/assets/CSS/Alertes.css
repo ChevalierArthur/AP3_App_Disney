@@ -1,0 +1,385 @@
+/* ───────── ALERTES PAGE ───────── */
+.alertes-page {
+    padding: 28px 32px;
+    font-family: 'Nunito', sans-serif;
+    min-height: calc(100vh - 106px);
+    background-color: #f7fbff;
+    width: 90vw;
+    box-sizing: border-box;
+}
+
+/* ── En-tête de page ── */
+.alertes-page__header {
+    margin-bottom: 24px;
+}
+
+.alertes-page__title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.alertes-page__title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1a6eb5;
+    margin: 0;
+}
+
+.alertes-page__subtitle {
+    color: #666;
+    font-size: 0.95rem;
+    margin-top: 4px;
+    font-weight: 600;
+}
+
+.alertes-total-badge {
+    background-color: #e0f0ff;
+    color: #1a6eb5;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+/* ── Barre de Statistiques ── */
+.stat-bar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 16px 20px;
+    flex: 1;
+    min-width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 16px rgba(26, 110, 181, 0.07);
+    border: 2px solid transparent;
+}
+
+.stat-count {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 8px 0 4px;
+    color: #222;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ── Contrôles : Recherche et Filtres ── */
+.alertes-controls {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.alertes-search {
+    flex: 1;
+    min-width: 250px;
+    padding: 10px 14px 10px 14px;
+    border: 2px solid #cce8f8;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background-color: #ffffff;
+    color: #222;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.alertes-search:focus {
+    border-color: #1a6eb5;
+}
+
+.alertes-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background-color: #ffffff;
+    color: #1a6eb5;
+    border: 2px solid #cce8f8;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-btn:hover {
+    background-color: #f0f9ff;
+    border-color: #1a6eb5;
+}
+
+.filter-btn.active {
+    background-color: #1a6eb5;
+    color: #ffffff;
+    border-color: #1a6eb5;
+}
+
+/* ── Liste et Cartes d'Alertes ── */
+.alertes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.alerte-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(26, 110, 181, 0.07);
+    display: flex;
+    overflow: hidden;
+    border: 1px solid #e8f5fc;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.alerte-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(26, 110, 181, 0.12);
+}
+
+.alerte-card__side-bar {
+    width: 6px;
+    flex-shrink: 0;
+    background-color: #1a6eb5; /* Écrasé par les classes de niveau */
+}
+
+.alerte-card__content {
+    padding: 20px;
+    flex: 1;
+}
+
+.alerte-card__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.alerte-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.alerte-attraction {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1a6eb5;
+    background-color: #e0f0ff;
+    padding: 4px 12px;
+    border-radius: 8px;
+}
+
+.alerte-date {
+    font-size: 0.85rem;
+    color: #888;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.alerte-titre {
+    margin: 0 0 8px 0;
+    font-size: 1.15rem;
+    color: #222;
+    font-weight: 800;
+}
+
+.alerte-description {
+    margin: 0 0 16px 0;
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+.alerte-card__footer {
+    border-top: 1px dashed #cce8f8;
+    padding-top: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.alerte-id {
+    font-size: 0.8rem;
+    color: #aaa;
+    font-weight: 700;
+}
+
+/* ── Couleurs par Niveau d'alerte (Badge, Sidebar, et Filtre Actif) ── */
+
+/* Niveau 1 : Critique (Rouge) */
+.niveau-1 .alerte-card__side-bar { background-color: #dc3545; }
+.niveau-1.alerte-badge { background-color: #ffeaea; color: #dc3545; }
+.niveau-1.filter-btn.active { background-color: #dc3545; border-color: #dc3545; color: white; }
+.niveau-1 .stat-count { color: #dc3545; }
+
+/* Niveau 2 : Élevé (Orange) */
+.niveau-2 .alerte-card__side-bar { background-color: #fd7e14; }
+.niveau-2.alerte-badge { background-color: #fff0e6; color: #fd7e14; }
+.niveau-2.filter-btn.active { background-color: #fd7e14; border-color: #fd7e14; color: white; }
+.niveau-2 .stat-count { color: #fd7e14; }
+
+/* Niveau 3 : Modéré (Jaune) */
+.niveau-3 .alerte-card__side-bar { background-color: #ffc107; }
+.niveau-3.alerte-badge { background-color: #fff8e6; color: #d39e00; }
+.niveau-3.filter-btn.active { background-color: #ffc107; border-color: #ffc107; color: #222; } /* Texte foncé pour le jaune */
+.niveau-3 .stat-count { color: #d39e00; }
+
+/* Niveau 4 : Faible (Vert) */
+.niveau-4 .alerte-card__side-bar { background-color: #28a745; }
+.niveau-4.alerte-badge { background-color: #e8f8ec; color: #1e8a3e; }
+.niveau-4.filter-btn.active { background-color: #28a745; border-color: #28a745; color: white; }
+.niveau-4 .stat-count { color: #28a745; }
+
+/* Niveau 5 : Info (Bleu) */
+.niveau-5 .alerte-card__side-bar { background-color: #1a6eb5; }
+.niveau-5.alerte-badge { background-color: #e0f0ff; color: #1a6eb5; }
+.niveau-5.filter-btn.active { background-color: #1a6eb5; border-color: #1a6eb5; color: white; }
+.niveau-5 .stat-count { color: #1a6eb5; }
+
+/* ── États Vides et Chargement ── */
+.alertes-loading, .alertes-error, .alertes-empty {
+    text-align: center;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(26, 110, 181, 0.07);
+    color: #aaa;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.alertes-error {
+    color: #dc3545;
+    background-color: #ffeaea;
+}.btn-supprimer-alerte {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px; /* Arrondi un peu plus moderne */
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    /* On ajoute shadow à la transition */
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
+}
+
+.btn-supprimer-alerte svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    stroke: currentColor;
+    transition: transform 0.2s ease;
+}
+
+/* --- EFFETS AU HOVER --- */
+
+.btn-supprimer-alerte:hover {
+    background-color: #bb2d3b;
+    /* Effet d'élévation */
+    transform: translateY(-1px);
+    /* Ombre plus prononcée pour l'effet de profondeur */
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+.btn-supprimer-alerte:hover svg {
+    /* Petite rotation de l'icône poubelle pour simuler le secouement */
+    transform: rotate(-10deg) scale(1.1);
+}
+
+/* --- EFFET AU CLIC (ACTIVE) --- */
+
+.btn-supprimer-alerte:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
+    filter: brightness(0.9);
+}
+/* ── Responsive ── */
+
+@media (max-width: 1024px) {
+    .alertes-page {
+        width: 95vw;
+        padding: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .alertes-page {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .alertes-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .alertes-filters {
+        overflow-x: auto;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .alerte-card__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .alerte-date {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .alertes-page {
+        padding: 12px;
+    }
+
+    .stat-bar {
+        flex-direction: column;
+    }
+
+    .alerte-card__content {
+        padding: 16px;
+    }
+
+    .filter-btn {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+}
+
+ 
