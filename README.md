@@ -61,3 +61,5 @@ Structure du Projet
 /Application web : Interface utilisateur développée avec React et Vite.
 
 /Base de données : Base de données
+
+[!TIP]Pour faciliter le test et la navigation dans l'application, tous les comptes de test sont configurés de la même manière :Le mot de passe est identique à l'identifiant (Nom d'utilisateur)
