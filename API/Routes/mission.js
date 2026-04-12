@@ -61,8 +61,42 @@ function deleteMission(req, res) {
         });
     });
 }
+function getMissionByUtilisateur(req, res) {
+    auth(req, res, () => {
+        const userId = req.body.id;
+        const query = 'select idMissionFaire from faire where idUtilisateurFaire = ?';
+        console.log(userId);
+        config.query(query, [userId], (err, results) => {
+            if (err) return res.status(500).json({ message: 'erreur bdd' });
+            res.json(results);
+            console.log(results);
+        });
+    });
+}
+function donnerMissionAUtilisateur(req, res) {
+    auth(req, res, () => {
+        const { idMission, idUtilisateur } = req.body;
+        const query = 'INSERT INTO faire (idMissionfaire, idUtilisateurfaire) VALUES (?, ?)';
+        config.query(query, [idMission, idUtilisateur], (err) => {
+            if (err) return res.status(500).json({ message: 'erreur bdd' });
+            res.json({ message: 'mission attribuée à l\'utilisateur' });
+        });
+    });
+}
+function retirerMissionAUtilisateur(req, res) {
+    auth(req, res, () => {
+        const { idMission, idUtilisateur } = req.body;
+        const query = 'DELETE FROM faire WHERE idMissionfaire = ? AND idUtilisateurfaire = ?';
+        config.query(query, [idMission, idUtilisateur], (err) => {
+            if (err) return res.status(500).json({ message: 'erreur bdd' });
+            res.json({ message: 'mission retirée de l\'utilisateur' });
+        });
+    });
+}
 
-
+router.post('/getMissionsByUtilisateur', getMissionByUtilisateur);
+router.post('/donnerMissionAUtilisateur', donnerMissionAUtilisateur);
+router.post('/retirerMissionAUtilisateur', retirerMissionAUtilisateur);
 router.get('/getMissions', getMissions);
 router.post('/addMission', addMission);
 router.put('/updateMission', updateMission);

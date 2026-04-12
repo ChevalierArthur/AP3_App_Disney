@@ -319,7 +319,17 @@
     padding: 16px;
     box-sizing: border-box;
 }
-
+.modal-content-mission {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(26, 110, 181, 0.15);
+    padding: 32px;
+    width: 100%;
+    max-width: 80vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
 .modal-content {
     background-color: #ffffff;
     border-radius: 20px;

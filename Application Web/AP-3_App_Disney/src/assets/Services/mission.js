@@ -68,4 +68,55 @@ export const deleteMission = async (id) => {
         return { message: "Le serveur ne répond pas." };
     }
 }
-
+export const getMissionByUtilisateur = async (id) => {
+    try {
+        const response = await fetch(`http://localhost:3000/missions/getMissionsByUtilisateur`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ id })
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erreur réseau ou serveur:', error);
+        return { message: "Le serveur ne répond pas." };
+    }
+}
+export const donnerMission = async (idMission, idUtilisateur) => {
+    try {
+        const response = await fetch(`http://localhost:3000/missions/donnerMissionAUtilisateur`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ idMission, idUtilisateur })
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erreur réseau ou serveur:', error);
+        return { message: "Le serveur ne répond pas." };
+    }
+}
+export const retirerMission = async (idMission, idUtilisateur) => {
+    try {
+        const response = await fetch(`http://localhost:3000/missions/retirerMissionAUtilisateur`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ idMission, idUtilisateur })
+        });
+        const data = await response.json();
+        return data;
+    }
+    catch (error) {
+        console.error('Erreur réseau ou serveur:', error);
+        return { message: "Le serveur ne répond pas." };
+    }
+}
